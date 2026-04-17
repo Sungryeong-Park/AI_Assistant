@@ -125,6 +125,7 @@ def _parse_intent(text: str, current_items: list) -> dict:
 - add: 구매 목록에 추가
 - remove: 구매 목록에서 삭제 (구매완료 포함)
 - list: 목록 조회
+- briefing: 아침 브리핑 재전송 요청 (브리핑, 날씨, 일정 등 조회 요청)
 - unknown: 위에 해당 없음
 
 규칙:
@@ -180,6 +181,11 @@ async def handle_text_message(text: str) -> None:
     elif action == "list":
         result_items = load_purchase_list()
         reply = f"현재 구매 목록:\n{format_purchase_list(result_items)}"
+
+    elif action == "briefing":
+        send_line_message("브리핑을 준비 중입니다...")
+        await asyncio.to_thread(run_morning_briefing)
+        return
 
     else:
         reply = "어떤 품목을 추가 또는 삭제할까요?"
