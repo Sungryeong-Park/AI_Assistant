@@ -4,3 +4,11 @@ __pycache__/
 *.pyc
 .DS_Store
 data/
+token.json
+credentials.json
+gcp-sa-key.json
+infra/terraform.tfvars
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
